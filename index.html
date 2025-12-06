@@ -2,356 +2,688 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Ayvid - A humane tech venture</title>
+  <title>Ayvid – Kids Activity Discovery & Booking Platform</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Ayvid is a technology startup building a digital platform called KidDing that helps parents discover, book, and manage activities for their kids, while helping hosts reach the right families." />
+  <meta name="description" content="Ayvid is a technology startup building a digital platform called KidDing that helps parents discover, book, and manage activities for their kids, while helping hosts reach the right families.">
   <style>
+    :root {
+      --bg: #050816;
+      --bg-alt: #070b1e;
+      --card-bg: #0b1022;
+      --accent: #4f46e5;
+      --accent-soft: rgba(79, 70, 229, 0.12);
+      --accent-soft-2: rgba(79, 70, 229, 0.06);
+      --text: #f9fafb;
+      --muted: #9ca3af;
+      --border-subtle: rgba(148, 163, 184, 0.3);
+      --shadow-soft: 0 24px 60px rgba(15, 23, 42, 0.6);
+      --radius-lg: 18px;
+      --radius-full: 999px;
+      --transition-fast: 180ms ease-out;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       margin: 0;
-      padding: 0;
-      line-height: 1.6;
-      color: #222;
-      background: #fafafa;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #1f2937 0, #020617 48%, #000 100%);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
     }
-    header, section, footer {
-      max-width: 960px;
-      margin: 0 auto;
-      padding: 2.5rem 1.5rem;
-    }
-    header {
-      padding-top: 3rem;
-      padding-bottom: 3rem;
-    }
-    .tagline {
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      font-size: 0.8rem;
-      opacity: 0.7;
-    }
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 0.5rem;
-    }
-    h2 {
-      font-size: 1.6rem;
-      margin-top: 0;
-    }
-    h3 {
-      font-size: 1.2rem;
-      margin-bottom: 0.25rem;
-    }
-    .hero-subtitle {
-      font-size: 1.1rem;
-      max-width: 600px;
-      margin-bottom: 1.5rem;
-    }
-    .hero-actions a {
-      display: inline-block;
-      margin-right: 1rem;
-      padding: 0.8rem 1.4rem;
-      border-radius: 999px;
+
+    a {
+      color: var(--accent);
       text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* Layout wrapper */
+    .page-shell {
+      min-height: 100vh;
+      padding: 0 1.5rem 3rem;
+    }
+
+    .page-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+
+    /* Top nav */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(18px);
+      background: linear-gradient(
+        to bottom,
+        rgba(2, 6, 23, 0.92),
+        rgba(2, 6, 23, 0.76),
+        transparent
+      );
+    }
+
+    .nav-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0.6rem 0 0.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+    }
+
+    .logo-mark {
+      width: 32px;
+      height: 32px;
+      border-radius: 12px;
+      background: radial-gradient(circle at 30% 20%, #f97316, #4f46e5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.8);
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #fdf2f8;
+    }
+
+    .nav-title {
       font-weight: 600;
+      letter-spacing: 0.03em;
       font-size: 0.95rem;
     }
-    .btn-primary {
-      background: #1a73e8;
-      color: white;
+
+    .nav-links {
+      display: flex;
+      gap: 1rem;
+      font-size: 0.85rem;
+      color: var(--muted);
     }
-    .btn-secondary {
-      border: 1px solid #1a73e8;
-      color: #1a73e8;
-      background: white;
-    }
-    .pill {
-      display: inline-block;
-      font-size: 0.78rem;
-      padding: 0.2rem 0.6rem;
+
+    .nav-links a {
+      padding: 0.35rem 0.7rem;
       border-radius: 999px;
-      background: #e8f0fe;
-      color: #174ea6;
-      margin-right: 0.35rem;
-      margin-bottom: 0.25rem;
+      text-decoration: none;
+      border: 1px solid transparent;
+      transition: background var(--transition-fast), border-color var(--transition-fast),
+        color var(--transition-fast), transform var(--transition-fast);
     }
+
+    .nav-links a:hover {
+      border-color: rgba(148, 163, 184, 0.5);
+      background: rgba(15, 23, 42, 0.9);
+      color: var(--text);
+      transform: translateY(-1px);
+    }
+
+    /* Hero */
+    header {
+      padding-top: 2.4rem;
+    }
+
+    .hero {
+      border-radius: 26px;
+      padding: 2.6rem 2.1rem 2.3rem;
+      background: radial-gradient(circle at top left, #111827, #020617 55%, #020617 100%);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      box-shadow: 0 30px 80px rgba(15, 23, 42, 0.9);
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background:
+        radial-gradient(circle at top left, rgba(248, 250, 252, 0.08), transparent 55%),
+        radial-gradient(circle at bottom right, rgba(56, 189, 248, 0.1), transparent 60%);
+      z-index: -1;
+      opacity: 0.9;
+    }
+
+    .tagline {
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-size: 0.72rem;
+      color: var(--muted);
+      margin-bottom: 0.8rem;
+    }
+
+    h1 {
+      font-size: 2.4rem;
+      margin: 0 0 0.5rem;
+      letter-spacing: 0.02em;
+    }
+
+    .hero-subtitle {
+      font-size: 1.02rem;
+      max-width: 580px;
+      color: var(--muted);
+      margin: 0 0 1.4rem;
+    }
+
+    .hero-pills {
+      margin-bottom: 1.6rem;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.28rem;
+      font-size: 0.76rem;
+      padding: 0.24rem 0.7rem;
+      border-radius: var(--radius-full);
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      color: var(--muted);
+      margin-right: 0.35rem;
+      margin-bottom: 0.35rem;
+      white-space: nowrap;
+    }
+
+    .pill-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.17);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      align-items: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.78rem 1.5rem;
+      border-radius: var(--radius-full);
+      font-weight: 600;
+      font-size: 0.9rem;
+      border: 1px solid transparent;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast),
+        background var(--transition-fast), border-color var(--transition-fast),
+        color var(--transition-fast);
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #4f46e5, #7c3aed);
+      color: #f9fafb;
+      box-shadow: 0 18px 40px rgba(79, 70, 229, 0.7);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 22px 50px rgba(79, 70, 229, 0.9);
+    }
+
+    .btn-secondary {
+      background: rgba(15, 23, 42, 0.92);
+      border-color: rgba(148, 163, 184, 0.6);
+      color: var(--muted);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(15, 23, 42, 1);
+      color: var(--text);
+      transform: translateY(-1px);
+      box-shadow: 0 16px 36px rgba(15, 23, 42, 0.85);
+    }
+
+    .hero-note {
+      margin-top: 0.95rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    /* Sections */
+    section {
+      margin-top: 2.8rem;
+    }
+
+    h2 {
+      font-size: 1.55rem;
+      margin: 0 0 0.7rem;
+      letter-spacing: 0.03em;
+    }
+
+    h3 {
+      font-size: 1.05rem;
+      margin: 0 0 0.3rem;
+    }
+
+    .muted {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.5rem;
+      gap: 1.4rem;
       align-items: flex-start;
     }
+
     .card {
-      background: white;
-      border-radius: 0.75rem;
-      padding: 1.5rem;
-      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.06);
+      background: linear-gradient(145deg, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.96));
+      border-radius: var(--radius-lg);
+      padding: 1.4rem 1.4rem 1.5rem;
+      border: 1px solid var(--border-subtle);
+      box-shadow: 0 18px 50px rgba(15, 23, 42, 0.9);
+      position: relative;
+      overflow: hidden;
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast),
+        border-color var(--transition-fast), background var(--transition-fast);
     }
-    .card h3 {
-      margin-top: 0;
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background: radial-gradient(circle at top right, var(--accent-soft), transparent 55%);
+      opacity: 0;
+      transition: opacity var(--transition-fast);
+      z-index: -1;
     }
-    .muted {
-      opacity: 0.8;
-      font-size: 0.95rem;
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 24px 60px rgba(15, 23, 42, 0.95);
+      border-color: rgba(129, 140, 248, 0.7);
     }
-    ul {
-      padding-left: 1.2rem;
+
+    .card:hover::before {
+      opacity: 1;
     }
-    .team-member {
-      margin-bottom: 1.2rem;
-    }
-    .team-member strong {
-      display: block;
-      font-size: 1rem;
-    }
+
     .small-label {
       text-transform: uppercase;
-      letter-spacing: 0.14em;
-      font-size: 0.72rem;
-      opacity: 0.7;
+      letter-spacing: 0.16em;
+      font-size: 0.7rem;
+      color: var(--muted);
+      margin-bottom: 0.45rem;
+      display: inline-block;
     }
+
+    ul, ol {
+      margin: 0.35rem 0 0;
+      padding-left: 1.1rem;
+      font-size: 0.9rem;
+      color: #e5e7eb;
+    }
+
+    li {
+      margin-bottom: 0.35rem;
+    }
+
+    /* Team */
+    #team .grid {
+      margin-top: 1rem;
+    }
+
+    .team-member {
+      background: linear-gradient(145deg, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.98));
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      padding: 1.5rem 1.2rem 1.35rem;
+      text-align: center;
+      box-shadow: 0 18px 50px rgba(15, 23, 42, 0.9);
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast),
+        border-color var(--transition-fast), background var(--transition-fast);
+    }
+
+    .team-member:hover {
+      transform: translateY(-3px);
+      border-color: rgba(129, 140, 248, 0.9);
+      box-shadow: 0 24px 65px rgba(15, 23, 42, 0.95);
+      background: radial-gradient(circle at top, #111827, #020617);
+    }
+
+    .team-photo {
+      width: 110px;
+      height: 110px;
+      border-radius: 999px;
+      object-fit: cover;
+      display: block;
+      margin: 0 auto 0.7rem;
+      border: 2px solid rgba(148, 163, 184, 0.7);
+      box-shadow: 0 16px 45px rgba(15, 23, 42, 0.95);
+    }
+
+    .team-name {
+      font-weight: 600;
+      font-size: 1.02rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .team-role {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--muted);
+    }
+
+    /* Contact */
+    #contact .card {
+      background: radial-gradient(circle at top left, #111827, #020617 70%);
+    }
+
     footer {
-      font-size: 0.85rem;
-      opacity: 0.8;
-      border-top: 1px solid #ddd;
       margin-top: 2rem;
-      padding-top: 1.5rem;
-      padding-bottom: 2rem;
+      padding-top: 1.2rem;
+      border-top: 1px solid rgba(31, 41, 55, 0.85);
+      font-size: 0.8rem;
+      color: var(--muted);
+      text-align: center;
     }
-    a {
-      color: #1a73e8;
+
+    /* Responsive tweaks */
+    @media (max-width: 720px) {
+      .hero {
+        padding: 1.8rem 1.2rem 1.7rem;
+        border-radius: 20px;
+      }
+
+      h1 {
+        font-size: 1.9rem;
+      }
+
+      .hero-subtitle {
+        font-size: 0.94rem;
+      }
+
+      .page-shell {
+        padding: 0 1.1rem 2.6rem;
+      }
+
+      .nav-links {
+        display: none;
+      }
     }
   </style>
 </head>
 <body>
-
-  <!-- HERO -->
-  <header>
-    <div class="tagline">Technology Startup · Kids Activity Platform</div>
-    <h1>Ayvid Pvt Ltd</h1>
-    <p class="hero-subtitle">
-     Ayvid is a tech start-up building a digital platform called KidDing that helps parents discover, book, and manage
-      high-quality activities for their kids, while helping hosts reach the right families
-      and grow their business.
-    </p>
-
-    <div>
-      <span class="pill">Digital-native platform</span>
-      <span class="pill">Parents & kids activities</span>
-      <span class="pill">Hosts & coaches</span>
-      <span class="pill">Mumbai & Bangalore</span>
-    </div>
-
-    <div class="hero-actions" style="margin-top:1.5rem;">
-      <!-- Replace # with actual URLs if you have them -->
-      <a href="hello@ayvidmind.com" class="btn-primary">Join Parent Waitlist</a>
-      <a href="hosts@ayvidmind.com" class="btn-secondary">Become a Host (Beta)</a>
-    </div>
-
-    <p class="muted" style="margin-top:0.75rem;">
-      Currently in development stage &mdash; launching initially in Mumbai & Bangalore with plans to expand globally.
-    </p>
-  </header>
-
-  <!-- BUSINESS DESCRIPTION -->
-  <section id="business">
-    <h2>What we do</h2>
-    <div class="grid">
-      <div>
-        <h3>The problem</h3>
-        <p>
-          Parents struggle to discover safe, age-appropriate, and engaging activities
-          for their kids. Information is scattered across WhatsApp groups, flyers,
-          and social media, and bookings are often manual and unreliable.
-        </p>
-        <p>
-          On the other side, coaches, tutors, and activity hosts find it hard to reach
-          the right families, manage schedules, and get paid on time.
-        </p>
+  <div class="page-shell">
+    <!-- NAVBAR -->
+    <div class="nav">
+      <div class="nav-inner">
+        <div class="nav-left">
+          <div class="logo-mark">[[SHORT LOGO TEXT]]</div>
+          <div class="nav-title">Ayvid Pvt Ltd</div>
+        </div>
+        <div class="nav-links">
+          <a href="#business">Business</a>
+          <a href="#product">Product</a>
+          <a href="#team">Team</a>
+          <a href="#contact">Contact</a>
+        </div>
       </div>
-      <div>
-        <h3>Our solution</h3>
-        <p>
-          KidDing is a unified platform where:
-        </p>
-        <ul>
-          <li>Parents can discover, compare, and book kids' activities in a few taps.</li>
-          <li>Hosts can list activities, manage enrollments, and receive payments.</li>
-          <li>Data and AI help match each child with the right activities over time.</li>
-        </ul>
+    </div>
+
+    <div class="page-inner">
+      <!-- HERO -->
+      <header>
+        <div class="hero">
+          <div class="tagline">Technology Startup · Kids Activity Platform</div>
+          <h1>KidDing</h1>
+          <p class="hero-subtitle">
+            KidDing is a digital platform that helps parents discover, book, and manage
+            high-quality activities for their kids, while helping hosts reach the right families
+            and grow their business.
+          </p>
+
+          <div class="hero-pills">
+            <span class="pill"><span class="pill-dot"></span> Digital-native platform</span>
+            <span class="pill">Parents & kids activities</span>
+            <span class="pill">Hosts & coaches</span>
+            <span class="pill">[[CITY / REGION FIRST MARKET]]</span>
+          </div>
+
+          <div class="hero-actions">
+            <a href="hello@ayvidmind.com" class="btn btn-primary">
+              Join Parent Waitlist
+            </a>
+            <a href="hosts@ayvidmind.com" class="btn btn-secondary">
+              Become a Host (Beta)
+            </a>
+          </div>
+
+          <p class="hero-note">
+            Currently in  DEVELOPMENT Stage — launching initially in India with plans to expand globally.
+          </p>
+        </div>
+      </header>
+
+      <!-- BUSINESS DESCRIPTION -->
+      <section id="business">
+        <h2>What we do</h2>
         <p class="muted">
-          Target audience: parents of kids aged 2-16 and
-          activity providers (coaches, academies, studios, community centers) in Mumbai & Bangalore initially, expanding globally.
+          We are building a digital-native, multi-sided platform focused on kids’ activities.
         </p>
-      </div>
-    </div>
-  </section>
+        <div class="grid">
+          <div class="card">
+            <span class="small-label">The problem</span>
+            <h3>Fragmented discovery for parents</h3>
+            <p class="muted" style="margin-top:0.4rem;">
+              Parents struggle to discover safe, age-appropriate, and engaging activities
+              for their kids. Information is scattered across social media, WhatsApp groups,
+              and flyers, and bookings are often manual and unreliable.
+            </p>
+          </div>
+          <div class="card">
+            <span class="small-label">Our solution</span>
+            <h3>A unified home for kids’ activities</h3>
+            <ul>
+              <li>Parents can discover, compare, and book activities in a few taps.</li>
+              <li>Hosts can list activities, manage enrollments, and receive payments.</li>
+              <li>Over time, data helps match each child with the right activities.</li>
+            </ul>
+            <p class="muted" style="margin-top:0.6rem;">
+              Target audience: parents of kids aged 2–16 and activity providers
+              (coaches, academies, studios, community centers) in India initially, expanding globally.
+            </p>
+          </div>
+        </div>
+      </section>
 
-  <!-- PRODUCT -->
-  <section id="product">
-    <h2>Our product</h2>
-    <p class="muted">
-      We are building a multi-sided platform with experiences tailored for parents, hosts, and admins.
-      Below is the current scope and development stage.
-    </p>
-
-    <div class="grid">
-      <div class="card">
-        <h3>Parent App</h3>
-        <p class="small-label">Stage:  IN DEVELOPMENT </p>
-        <ul>
-          <li>Browse activities by age, interest, location, and schedule.</li>
-          <li>Create and manage child profiles and preferences.</li>
-          <li>Book and pay securely for classes, camps, and workshops.</li>
-          <li>Track enrollments, attendance, and certificates in one place.</li>
-        </ul>
-        <!-- Optional: link to screenshots or demo -->
+      <!-- PRODUCT -->
+      <section id="product">
+        <h2>Our product</h2>
         <p class="muted">
-          Screenshots: <a href="[[LINK_TO_SCREENSHOTS_FOLDER_OR_FIGMA_EXPORT]]">View sample screens</a>
+          KidDing is a platform with experiences tailored for parents, hosts, and admins.
+          Below is the current scope and development stage.
         </p>
-      </div>
 
-      <div class="card">
-        <h3>Host Portal</h3>
-        <p class="small-label">Stage: IN DEVELOPMENT</p>
-        <ul>
-          <li>Create and manage activities, batches, and pricing.</li>
-          <li>Receive and confirm bookings from parents in real time.</li>
-          <li>Communicate with parents and share updates.</li>
-          <li>View basic analytics on attendance and revenue.</li>
-        </ul>
+        <div class="grid" style="margin-top:1rem;">
+          <div class="card">
+            <span class="small-label">Parent experience</span>
+            <h3>Parent App</h3>
+            <p class="muted">
+              Stage: IN DEVELOPMENT
+            </p>
+            <ul>
+              <li>Browse activities by age, interest, location, and schedule.</li>
+              <li>Create and manage child profiles and preferences.</li>
+              <li>Book and pay securely for classes, camps, and workshops.</li>
+              <li>Track enrollments, attendance, and certificates in one place.</li>
+            </ul>
+            <p class="muted" style="margin-top:0.5rem;">
+              Screenshots:
+              <a href="[[LINK_TO_SCREENSHOTS_FOLDER_OR_FIGMA_EXPORT]]">View sample screens</a>
+            </p>
+          </div>
+
+          <div class="card">
+            <span class="small-label">Host experience</span>
+            <h3>Host Portal</h3>
+            <p class="muted">
+              Stage: IN DEVELOPMENT
+            </p>
+            <ul>
+              <li>Create and manage activities, batches, and pricing.</li>
+              <li>Receive and confirm bookings from parents in real time.</li>
+              <li>Communicate with parents and share updates.</li>
+              <li>View basic analytics on attendance and revenue.</li>
+            </ul>
+            <p class="muted" style="margin-top:0.5rem;">
+              Interested in hosting?
+              <a href="hosts@ayvidmind.com">Apply to our host beta</a>.
+            </p>
+          </div>
+
+          <div class="card">
+            <span class="small-label">Data & AI layer</span>
+            <h3>Smart matching & insights</h3>
+            <p class="muted">
+              Stage: EARLY EXPERIMENTS
+            </p>
+            <ul>
+              <li>Recommendation engine to match kids with suitable activities.</li>
+              <li>Smart search, filters, and personalized suggestions.</li>
+              <li>Insights for hosts on demand trends and engagement.</li>
+            </ul>
+            <p class="muted" style="margin-top:0.5rem;">
+              Built on GOOGLE CLOUD, designed to scale globally.
+            </p>
+          </div>
+        </div>
+
+        <!-- Optional demo -->
+        <div style="margin-top:1.8rem;">
+          <h3>Product demo</h3>
+          <p class="muted">
+            Watch a short walkthrough of our current prototype:
+            <a href="[[DEMO_VIDEO_URL, e.g. YOUTUBE/LOOM]]">View demo video</a>
+          </p>
+        </div>
+      </section>
+
+      <!-- HOW IT WORKS -->
+      <section id="how-it-works">
+        <h2>How it works</h2>
+        <div class="grid">
+          <div class="card">
+            <span class="small-label">For parents</span>
+            <h3>From search to enrollment in minutes</h3>
+            <ol>
+              <li>Sign up and add one or more child profiles.</li>
+              <li>Discover curated activities based on age, interests, and location.</li>
+              <li>Book and pay directly through the platform.</li>
+              <li>Track schedules, attendance, and progress in your dashboard.</li>
+            </ol>
+          </div>
+          <div class="card">
+            <span class="small-label">For hosts</span>
+            <h3>Grow your activity business</h3>
+            <ol>
+              <li>Create a host profile and list your activities.</li>
+              <li>Set schedules, capacity, and pricing.</li>
+              <li>Accept bookings and manage rosters.</li>
+              <li>Get paid reliably and view performance insights.</li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <!-- TRACTION & ROADMAP -->
+      <section id="traction">
+        <h2>Current stage & roadmap</h2>
+        <div class="grid">
+          <div class="card">
+            <span class="small-label">Today</span>
+            <h3>Where we are</h3>
+            <ul>
+              <li>MVP design completed and engineering in progress.</li>
+              <li>Early conversations with 100+ hosts in Mumbai & Bangalore.</li>
+              <li>Parent waitlist of 1000+ families.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <span class="small-label">Next</span>
+            <h3>What’s next</h3>
+            <ul>
+              <li>Private beta launch with select hosts and parents in May 2026.</li>
+              <li>Public launch in November 2026.</li>
+              <li>Gradual rollout of AI-powered recommendations and analytics.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- TEAM (IMAGE + ROLE ONLY) -->
+      <section id="team">
+        <h2>Our team</h2>
         <p class="muted">
-          Interested in hosting? Reach us @<a href="hosts@ayvidmind.com">Apply to our host beta</a>.
+          The team building KidDing.
         </p>
-      </div>
 
-      <div class="card">
-        <h3>Data & AI Layer</h3>
-        <p class="small-label">Stage: EARLY EXPERIMENTS</p>
-        <ul>
-          <li>Recommendation engine to match kids with suitable activities.</li>
-          <li>Smart search, filters, and personalized suggestions.</li>
-          <li>Insights for hosts on demand trends and engagement.</li>
-        </ul>
-        <p class="muted">
-          Built on GOOGLE CLOUD, designed to scale globally.
-        </p>
-      </div>
+        <div class="grid">
+          <!-- Founder -->
+          <div class="team-member">
+            <img
+              src="[[FOUNDER_IMAGE_URL]]"
+              alt="Divya"
+              class="team-photo"
+            />
+            <div class="team-name">Divya Manchale Nagaraj</div>
+            <div class="team-role">Co-Founder</div>
+          </div>
+
+          <!-- Co-founder (optional, duplicate block if you have more) -->
+          
+          <div class="team-member">
+            <img
+              src="[[COFOUNDER_IMAGE_URL]]"
+              alt="Akkshay"
+              class="team-photo"
+            />
+            <div class="team-name">Akkshay A Dogra</div>
+            <div class="team-role">Founder</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section id="contact">
+        <h2>Contact & company details</h2>
+        <div class="card">
+          <p>
+            <strong>Company:</strong> Ayvid Pvt Ltd<br />
+            <strong>Headquarters:</strong> Mumbai<br />
+            <strong>Email:</strong> <a href="mailto:founders@ayvidmind.com">founders@ayvidmind.com</a><br />
+            <strong>Website:</strong> ayvidmind.com
+          </p>
+          <p class="muted" style="margin-top:0.6rem;">
+            For partnership, pilot, or investment inquiries, please email us - founders@ayvidmind.com with the subject
+            line “Partnership” or “Investment” and we’ll get back to you.
+          </p>
+        </div>
+      </section>
+
+      <footer>
+        © 2025 Ayvid pvt ltd. All rights reserved.
+      </footer>
     </div>
-
-    <!-- Optional DEMO section -->
-    <div style="margin-top:2rem;">
-      <h3>Product demo</h3>
-      <p>
-        Watch a short walkthrough of our current prototype:
-        <a href="[[DEMO_VIDEO_URL, e.g. YOUTUBE/LOOM]]">View demo video</a>
-      </p>
-    </div>
-  </section>
-
-  <!-- HOW IT WORKS -->
-  <section id="how-it-works">
-    <h2>How it works</h2>
-    <div class="grid">
-      <div>
-        <h3>For parents</h3>
-        <ol>
-          <li>Sign up and add one or more child profiles.</li>
-          <li>Discover curated activities based on age, interests, and location.</li>
-          <li>Book and pay directly through the platform.</li>
-          <li>Track schedules, attendance, and progress in your dashboard.</li>
-        </ol>
-      </div>
-      <div>
-        <h3>For hosts</h3>
-        <ol>
-          <li>Create a host profile and list your activities.</li>
-          <li>Set schedules, capacity, and pricing.</li>
-          <li>Accept bookings and manage rosters.</li>
-          <li>Get paid reliably and view performance insights.</li>
-        </ol>
-      </div>
-    </div>
-  </section>
-
-  <!-- TRACTION & ROADMAP -->
-  <section id="traction">
-    <h2>Current stage & roadmap</h2>
-    <div class="grid">
-      <div>
-        <h3>Where we are today</h3>
-        <ul>
-          <li>MVP design completed and engineering in progress.</li>
-          <li>Early conversations with 100 hosts in Mumbai & Bangalore.</li>
-          <li>Parent waitlist of 1000 families.</li>
-        </ul>
-      </div>
-      <div>
-        <h3>What’s next</h3>
-        <ul>
-          <li>Private beta launch with select hosts and parents in May 2026.</li>
-          <li>Public launch in November 2026.</li>
-          <li>Gradual rollout of AI-powered recommendations and analytics.</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
- <!-- TEAM -->
-<section id="team">
-  <h2>Our Team</h2>
-  <p class="muted">
-    The team behind KidDing.
-  </p>
-
-  <div class="grid">
-
-    <!-- Founder -->
-    <div class="team-member" style="text-align:center;">
-      <img src="[[FOUNDER_IMAGE_URL]]" alt="Divya Manchale Nagaraj" 
-           style="width:120px;height:120px;border-radius:50%;object-fit:cover;margin-bottom:0.8rem;">
-      <strong style="display:block;font-size:1.1rem;">Divya Manchale Nagaraj</strong>
-      <span class="small-label">Co-Founder</span>
-    </div>
-
-    <!-- Co-founder (Optional) -->
-    <div class="team-member" style="text-align:center;">
-      <img src="[[COFOUNDER_IMAGE_URL]]" alt="Akkshay A Dogra" 
-           style="width:120px;height:120px;border-radius:50%;object-fit:cover;margin-bottom:0.8rem;">
-      <strong style="display:block;font-size:1.1rem;">Akkshay A Dogra</strong>
-      <span class="small-label">Founder</span>
-    </div>
-
-    <!-- Add more team members below as needed -->
-    <!--
-    <div class="team-member" style="text-align:center;">
-      <img src="[[TEAM_IMAGE_URL]]" alt="[[TEAM MEMBER NAME]]" 
-           style="width:120px;height:120px;border-radius:50%;object-fit:cover;margin-bottom:0.8rem;">
-      <strong style="display:block;font-size:1.1rem;">[[TEAM MEMBER NAME]]</strong>
-      <span class="small-label">[[ROLE]]</span>
-    </div>
-    -->
-
   </div>
-</section>
-
-  <!-- CONTACT -->
-  <section id="contact">
-    <h2>Contact & company details</h2>
-    <p>
-      <strong>Company:</strong> Ayvid Pvt Ltd<br />
-      <strong>Headquarters:</strong> Mumbai, Maharashtra, India<br />
-      <strong>Email:</strong> <a href="mailto:founders@ayvidmind.com">founders@ayvidmind.com</a><br />
-      <strong>Website:</strong> ayvidmind.com
-    </p>
-    <p class="muted">
-      For partnership, pilot, or investment inquiries, please email us - founders@ayvidmind.com with the subject
-      line “Partnership” or “Investment” and we’ll get back to you.
-    </p>
-  </section>
-
-  <footer>
-    © Ayvid Pvt Ltd. All rights reserved.
-  </footer>
-
 </body>
 </html>
